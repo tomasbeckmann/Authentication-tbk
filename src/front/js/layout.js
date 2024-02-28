@@ -17,6 +17,10 @@ import { LoginView } from "./views/login"
 import { Toaster } from "sonner";
 import { ProtectedRoute } from './component/protectedroute.js'
 
+import { useContext, useEffect } from 'react';
+import { Context } from './store/appContext';
+import { PrivateView } from "./views/private.js"
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -25,18 +29,19 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
+    const { store, actions } = useContext(Context);
+
     return (
         <div>
             <Toaster position="top-center" />
             <BrowserRouter basename={basename}>
 
                 <Routes>
-                    <Route element={<ProtectedRoute />}>
-                        <Route element={<LoginView />} path="/" />
-                        <Route element={<RegisterForm />} path="/register" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<h1>Not found!</h1>} />
+                    <Route element={<LoginView />} path="/" />
+                    <Route element={<RegisterForm />} path="/register" />
+                    
+                    <Route element={<ProtectedRoute user={store.user} />}>
+                        <Route element={<PrivateView />} path="/private" />
                     </Route>
                 </Routes>
 

@@ -7,11 +7,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: {}
 		},
 		actions: {
-			fetchRegister: (data2) => {
+			fetchRegister: (data) => {
 				const storage = getStore()
 				fetch("https://bug-free-space-goggles-wr764pj5q9vwh5rg4-3001.app.github.dev/user", {
 					method: "POST",
-					body: JSON.stringify(data2),
+					body: JSON.stringify(data),
 					headers: {
 						"content-type": "application/json",
 						Authorization: `Bearer ${storage.token}`
@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("response", response)
 					return response.json()
 				}).then((data2) => {
-					console.log("data", data2)
+					console.log("data", data)
 				})
 			},
 			fetchLogin: (data) => {
@@ -31,10 +31,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {
 						"content-type": "application/json",
 						Authorization: `Bearer ${storage.token}`
-
 					},
 				})
 					.then((response) => {
+						console.log(response.json)
 						if (response.status === 200) {
 							return response.json()
 						} if (response.status === 401) {
@@ -54,8 +54,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response) => {
 						setStore({ token: response.token, user: response.user })
 						localStorage.setItem("TOKEN", response.token)
-						return response.user
+						return true
 					})
+			},
+			fetchToken: (data) => {
+				const storage = getStore()
+				return fetch("https://bug-free-space-goggles-wr764pj5q9vwh5rg4-3001.app.github.dev/private", {
+					method: "GET",
+					headers: {
+						"content-type": "application/json",
+						Authorization: `Bearer ${storage.token}`
+					},
+				}).then((response) => {
+					console.log("response", response)
+					return response.json()
+				})
 			},
 		}
 	};

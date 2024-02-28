@@ -71,7 +71,6 @@ def login():
   password= request.json.get("password")
 
   user_exist = User.query.filter_by(email= user).first()
-  print(user_exist.password)
   if user_exist is not None:
     if bcrypt.check_password_hash(user_exist.password, password):
         token= create_access_token(identity= user, expires_delta= expire_jwt)
@@ -85,6 +84,17 @@ def login():
        return jsonify({"error": "Incorrect password"}), 400
   else:
        return jsonify({"error": "User doesn't exist"}), 401
+  
+@app.route('/private', methods=['GET'])
+@jwt_required()
+def get():
+ user = get_jwt_identity()
+ print(user)
+
+ return jsonify ({
+          "status": "success",
+          "user": user
+        }), 200
 
 # add the admin
 setup_admin(app)

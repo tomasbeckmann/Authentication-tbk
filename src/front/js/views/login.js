@@ -15,16 +15,14 @@ export const LoginView = () => {
         event.preventDefault();
 
         if (isFormValid()) {
-            var TOKEN = localStorage.getItem("TOKEN")
             const inputData = Object.fromEntries(new FormData(event.target));
             console.log(inputData)
-            actions.fetchLogin(inputData).then((user) => {
-                if (TOKEN) {
-                    navigate("/private")
-                } else {
-                    navigate("/login")
-                }
-            })
+            const result = await actions.fetchLogin(inputData)
+            if(result){
+                navigate("/private")
+            } else {
+                navigate("/")
+            }
         }
     };
 

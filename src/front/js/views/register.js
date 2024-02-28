@@ -7,7 +7,6 @@ export const RegisterForm = () => {
   const [formState, setFormState] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -26,48 +25,31 @@ export const RegisterForm = () => {
     console.log(Object.fromEntries(new FormData(event.target)));
     actions.fetchRegister(inputData);
     alert("Account created!");
-    clearForm();
 
   };
 
   return (
     <form method="POST" onSubmit={handleRegister} className="register-form">
-    <div className="form-group">
-      <label htmlFor="email" className="form-label">Email:</label>
-      <input
-        type="text"
-        name="email"
-        value={formState.email}
-        onChange={handleInputChange}
-        className="form-control"
-      />
-      {errors.email && <p className="error">{errors.email}</p>}
-    </div>
-    <div className="form-group">
-      <label htmlFor="password" className="form-label">Password:</label>
-      <input
-        type="password"
-        name="password"
-        value={formState.password}
-        onChange={handleInputChange}
-        className="form-control"
-      />
-      {errors.password && <p className="error">{errors.password}</p>}
-    </div>
-    <div className="form-group">
-      <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
-      <input
-        type="password"
-        name="confirmPassword"
-        value={formState.confirmPassword}
-        onChange={handleInputChange}
-        className="form-control"
-      />
-      {errors.confirmPassword && (
-        <p className="error">{errors.confirmPassword}</p>
-      )}
-    </div>
-    <button type="submit" className="btn btn-primary">Register</button>
-  </form>
+      <div>
+        <label className="form-label">Email:</label>
+        <input
+          type="text"
+          name="email"
+          onChange={handleInputChange}
+          className="form-control"
+        />
+        {errors.email && <p className="error">{errors.email}</p>}
+      </div>
+      <div>
+        <label className="form-label">Password:</label>
+        <input
+          type="password"
+          name="password"
+          onChange={handleInputChange}
+          className="form-control"
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">Register</button>
+    </form>
   );
 }
