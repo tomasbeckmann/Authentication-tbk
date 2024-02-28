@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 
-	handleLogout = () => {
-		localStorage.setItem("Token", "token")
+	const handleLogout = () => {
+		localStorage.removeItem("TOKEN")
+		localStorage.clear()
 	}
 
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+					<span className="navbar-brand mb-0 h1">Homepage</span>
 				</Link>
 				<div className="ml-auto">
-						<button className="btn btn-primary">Cerrar</button>
+					<button onClick={handleLogout} className="btn btn-primary">Cerrar sesion</button>
 				</div>
 			</div>
 		</nav>
