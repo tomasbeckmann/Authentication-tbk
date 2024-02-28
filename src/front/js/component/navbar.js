@@ -1,11 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+	const navigate = useNavigate();
 
-	const handleLogout = () => {
+	const handleLogout = (event) => {
+		event.preventDefault()
 		localStorage.removeItem("TOKEN")
-		localStorage.clear()
+		sessionStorage.removeItem("TOKEN")
+		navigate("/")
 	}
 
 	return (
@@ -15,7 +19,7 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">Homepage</span>
 				</Link>
 				<div className="ml-auto">
-					<button onClick={handleLogout} className="btn btn-primary">Cerrar sesion</button>
+					<button onClick={handleLogout} className="btn btn-primary">Log out</button>
 				</div>
 			</div>
 		</nav>

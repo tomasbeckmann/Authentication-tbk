@@ -54,6 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((response) => {
 						setStore({ token: response.token, user: response.user })
 						localStorage.setItem("TOKEN", response.token)
+						sessionStorage.setItem("TOKEN", response.token)
 						return true
 					})
 			},

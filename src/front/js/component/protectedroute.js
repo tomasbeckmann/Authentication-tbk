@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 export const ProtectedRoute = ({ user }) => {
 
-    const isLoggedIn = localStorage.getItem('token') !== null;
+    const isLoggedIn = localStorage.getItem('TOKEN') !== null;
 
     const navigate = useNavigate();
 

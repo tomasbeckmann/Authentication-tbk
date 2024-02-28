@@ -18,7 +18,7 @@ export const LoginView = () => {
             const inputData = Object.fromEntries(new FormData(event.target));
             console.log(inputData)
             const result = await actions.fetchLogin(inputData)
-            if(result){
+            if (result) {
                 navigate("/private")
             } else {
                 navigate("/")
@@ -37,7 +37,7 @@ export const LoginView = () => {
                 <div className="login-container">
                     <div className="signin-content">
                         <div className="signin-form">
-                            <h2 className="form-title">Inicio de sesión</h2>
+                            <h2 className="form-title">Login</h2>
                             <form onSubmit={handleLogin} className="register-form" id="login-form">
                                 <div className="form-group">
                                     <label htmlFor="your_email">
@@ -72,7 +72,9 @@ export const LoginView = () => {
                                 <div className="form-group form-button">
                                     <input type="submit" name="signin" id="signin" className="form-submit" value="Log in" />
                                 </div>
+
                             </form>
+                            <a className='text-center' href='/register'>Or create a New Account</a>
                         </div>
                     </div>
                 </div>

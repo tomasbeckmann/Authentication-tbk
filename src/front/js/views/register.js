@@ -29,27 +29,32 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form method="POST" onSubmit={handleRegister} className="register-form">
-      <div>
-        <label className="form-label">Email:</label>
-        <input
-          type="text"
-          name="email"
-          onChange={handleInputChange}
-          className="form-control"
-        />
-        {errors.email && <p className="error">{errors.email}</p>}
-      </div>
-      <div>
-        <label className="form-label">Password:</label>
-        <input
-          type="password"
-          name="password"
-          onChange={handleInputChange}
-          className="form-control"
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">Register</button>
-    </form>
+    <div className="container register-body">
+
+      <form method="POST" onSubmit={handleRegister} className="register-form  centered-form">
+        <h2 className="form-title">Register</h2>
+        <div>
+          <label className="form-label">Email:</label>
+          <input
+            type="text"
+            name="email"
+            onChange={handleInputChange}
+            className="form-control"
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
+        <div>
+          <label className="form-label">Password:</label>
+          <input
+            type="password"
+            name="password"
+            onChange={handleInputChange}
+            className="form-control"
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">Register</button>
+        <a className='float-start mt-3 text-decoration-none' href='/'>Or go back to Login</a>
+      </form>
+    </div>
   );
 }
